@@ -1,23 +1,25 @@
 DEBUG=yes
 CXX=g++
-ifeq ($(DEBUG),yes)
-	CXXFLAGS=-std=c++11 -Wall -Wextra -pedantic -g
-else
-	CXXFLAGS=-std=c++11 -march=native -O2
-endif
 LDFLAGS=-lsfml-network -lsfml-audio -lsfml-graphics -lsfml-window -lsfml-system
 
-OBJ_DIR=obj/
 SRC_DIR=src/
 INCLUDE_DIR=include/
 LIB_DIR=lib/
 BIN_DIR=bin/
 
-SRC=$(wildcard $(SRC_DIR)*.cpp)
-SRC_BIS=$(subst $(SRC_DIR),$(OBJ_DIR),$(SRC))
-OBJ=$(SRC_BIS:.cpp=.o)
+ifeq ($(DEBUG),yes)
+	CXXFLAGS=-std=c++11 -Wall -Wextra -pedantic -g
+	OBJ_DIR=obj/debug/
+	EXE=$(BIN_DIR)tamagotchi-debug
+else
+	CXXFLAGS=-std=c++11 -march=native -O2
+	OBJ_DIR=obj/release/
+	EXE=$(BIN_DIR)tamagotchi-release
+endif
 
-EXE=$(BIN_DIR)tamagotchi
+SRC=$(wildcard $(SRC_DIR)*.cpp)
+TMP_OBJ=$(subst $(SRC_DIR),$(OBJ_DIR),$(SRC))
+OBJ=$(TMP_OBJ:.cpp=.o)
 
 all: $(EXE)
 

@@ -5,8 +5,6 @@
 #include "Audio_engine.hpp"
 #include "Network_engine.hpp"
 
-#include <iostream>
-
 Game::Game() :
     m_stillRunning(false)
 {

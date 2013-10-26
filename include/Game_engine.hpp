@@ -4,6 +4,7 @@
 #include "Engine.hpp"
 #include <memory>
 
+#include <SFML/Graphics.hpp>
 class Game_engine : public Engine
 {
 public:
